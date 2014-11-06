@@ -21,3 +21,4 @@ en:
   label_surveys_saveagain: 'Save again'
   label_surveys_changeanswer: ' You can change your answer. But after changes press the button again.'
   label_surveys_savechanges: ' Please save your answer by pressing "Save".'
+  label_surveys_remove: 'Delete'

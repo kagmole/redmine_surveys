@@ -21,3 +21,4 @@ fr:
   label_surveys_saveagain: 'Enregistrer à nouveau'
   label_surveys_changeanswer: 'Vous pouvez changer votre réponse en appuyant à nouveau sur le bouton.'
   label_surveys_savechanges: 'Sauvegarder votre réponse en cliquant sur le bouton "Enregistrer"'
+  label_surveys_remove: 'Supprimer'
