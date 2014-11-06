@@ -7,7 +7,7 @@ class SurveysController < ApplicationController
   before_filter :authorize, :except => :preview
 
   def index
-    @surveys = Survey.where(project_id: @project.id)
+    @surveys = Survey.where(project_id: @project.id).order(:created_at)
   end
   
   def new
