@@ -1,7 +1,7 @@
 # German strings go here for Rails i18n
 de:
   label_surveys: 'Umfragen'
-  label_survey_new: 'neue Umfrage'
+  label_survey_new: 'Neue Umfrage'
   label_surveys_note: 'Bitte versichere dich nach jeder Antwort der "Speichern" Button zu betätigen.'
   label_surveys_allowedit: 'Bearbeiten erlauben'
   label_surveys_allowcomments: 'Kommentare erlauben'

@@ -1,7 +1,7 @@
 # English strings go here for Rails i18n
 en:
   label_surveys: 'Surveys'
-  label_survey_new: 'new survey'
+  label_survey_new: 'New survey'
   label_surveys_note: 'Please make sure that you pressed the "Save" button after answering each question. Thank you for completing the Survey Questionnaire.'
   label_surveys_allowedit: 'Allow Edit'
   label_surveys_allowcomments: 'Allow Comments'
