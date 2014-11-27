@@ -99,7 +99,7 @@ class SurveysController < ApplicationController
       if params[:response]
         # remove answers for this user first
         [*params[:response]].each do |r|
-          respond_to(r)
+          respond_to_answer(r)
         end
       end
       if params[:comment] && !params[:comment].empty? 
@@ -141,7 +141,7 @@ class SurveysController < ApplicationController
     @project = Project.find(params[:project_id] || @survey.project_id)    
   end
   
-  def respond_to(answer_id)
+  def respond_to_answer(answer_id)
     if a = @survey.answers.find(answer_id)
       r = Response.new()
       r.user = User.current
