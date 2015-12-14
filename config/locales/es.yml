@@ -1,5 +1,5 @@
 # English strings go here for Rails i18n
-en:
+es:
   label_surveys: 'Encuestas'
   label_survey_new: 'Crear nueva encuesta'
   label_surveys_note: 'Por favor presiona guardar luego de contestar cada pregunta.'
