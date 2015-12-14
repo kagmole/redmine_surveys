@@ -14,5 +14,5 @@ Redmine::Plugin.register :redmine_surveys do
   end
   
   menu :project_menu, :surveys, { :controller => 'surveys', :action => 'index' },
-    :caption => 'Surveys', :after => :wiki, :param => :project_id
+    :caption => :label_surveys, :after => :wiki, :param => :project_id
 end
