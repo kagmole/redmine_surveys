@@ -2,12 +2,12 @@ class SurveysController < ApplicationController
   unloadable
 
   layout 'base'
+
   before_filter :find_survey_and_project, :except => :preview
   before_filter :authorize, :except => :preview
 
-
   def index
-    @surveys = Survey.find_all_by_project_id(@project)
+    @surveys = Survey.where(project_id: @project.id)
   end
   
   def new
@@ -16,7 +16,7 @@ class SurveysController < ApplicationController
   end
 
   def create
-    @survey = Survey.new(params[:survey])
+    @survey = Survey.new(survey_params)
     @survey.project = @project
     @survey.user = User.current
     if @survey.save
@@ -29,7 +29,7 @@ class SurveysController < ApplicationController
   end
   
   def update
-    if params[:survey] && @survey.update_attributes(params[:survey])
+    if survey_params && @survey.update_attributes(survey_params)
       # update existing questions
       params[:existing_answers].each do |id, a|
         answer = Answer.find(id)
@@ -43,6 +43,7 @@ class SurveysController < ApplicationController
   end
   
   def show
+    redirect_to :action => 'index', :project_id => @project.identifier
   end
   
   def results
@@ -113,7 +114,7 @@ class SurveysController < ApplicationController
   end
   
   def preview
-    @survey = Survey.new(params[:survey])
+    @survey = Survey.new(survey_params)
     @answers = []
     params[:answers].is_a?(Hash) && params[:answers].each_value do |a|
       answer = Answer.new
@@ -155,6 +156,10 @@ class SurveysController < ApplicationController
       answer.content = a[:content]
       @survey.answers << answer
     end
+  end
+
+  def survey_params
+    params.require(:survey).permit(:subject, :allow_edit, :allow_comment, :multiple_choice, :valid_until, :content, :comment_hint)
   end
 
 end

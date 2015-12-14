@@ -1,24 +1,27 @@
 class Survey < ActiveRecord::Base
   belongs_to :user
   belongs_to :project
-  has_many :answers, :dependent => :destroy, :order => 'id asc'
+  has_many :answers, -> { order 'id asc' }, :dependent => :destroy
   has_many :response_comments
   has_many :responses, :through => :answers
-  has_many :responders, :class_name => 'User', :finder_sql => proc {
-"select users.* " +
-"from users " +
-"left join responses on responses.user_id = users.id " +
-"left join answers on responses.answer_id = answers.id " +
-"left join surveys on answers.survey_id = surveys.id " +
-"left join response_comments on response_comments.user_id = users.id " +
-"where surveys.id = #{self.id} " +
-"group by users.id" }
-  
+
   # alternative to responders:
   #User.find(Response.count(:conditions => {:answer_id => Survey.all.first.answer_ids}, :group => :user_id).keys)
 
+  def responders
+    sql = "select users.*
+           from users
+           left join responses on responses.user_id = users.id
+           left join answers on responses.answer_id = answers.id
+           left join surveys on answers.survey_id = surveys.id
+           left join response_comments on response_comments.user_id = users.id
+           where surveys.id = #{self.id}
+           group by users.id"
+    User.find_by_sql(sql)
+  end
+
   def response_from?(user)
-    not self.responders.find(user.id).nil?
+    not self.responders.select{ |u| u.id == user.id }.nil?
   end
   
   #def total_responses
@@ -36,10 +39,10 @@ class Survey < ActiveRecord::Base
   #end
   
   def remove_response_by_user(user)
-    Response.find_all_by_user_id_and_answer_id(user.id, answer_ids).each do |r|
+    Response.where(user_id: user.id, answer_id: answer_ids).each do |r|
       r.destroy
     end
-    ResponseComment.find_all_by_user_id_and_survey_id(user.id, id).each do |r|
+    ResponseComment.where(user_id: user.id, survey_id: id).each do |r|
       r.destroy
     end
   end
