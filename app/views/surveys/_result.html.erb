@@ -1,6 +1,6 @@
 <table width=100%>
 <% survey.answers.each do |answer|
-   answer_percent = (survey.responders.length > 0) ? (answer.responses.length.to_f / survey.responders.length.to_f * 100) : 0 
+   answer_percent = (survey.responders.length > 0) ? (answer.responses.length.to_f / survey.responders.length.to_f * 100) : 0
 %>
   <tr>
   <td style="width: 50%">
@@ -10,7 +10,7 @@
     <div style='background-color: red; color: white; width:<%= answer_percent %>%; text-align: right; padding-right: 10px;'> <%= answer.responses.count %> </div>
   </td>
   <td style="width: 10%; text-align: right">
-     <%= format("%.2f",answer_percent) %> %     
+     <%= format("%.2f",answer_percent) %> %
   </td>
 </tr>
 <% end %>
@@ -24,7 +24,7 @@
 <% survey.response_comments.each do |r| %>
   <div class=box>
    <%= l(:label_surveys_commentsfrom) %> <%= link_to_user(r.user) %>
-   <hr/> 
+   <hr/>
    <%= textilizable(r.content) %>
   </div>
 <% end %>

@@ -2,7 +2,7 @@
   <%= form_for @survey, :url => {:controller => 'surveys', :action => 'update', :project_id => @project, :id => @survey}, :html => {:id => 'survey-form'} do |f| %>
     <%= render :partial => 'surveys/form', :locals => {:f => f} %>
     <p><%= submit_tag l(:button_change) %>
-    <%#= link_to l(:label_preview), 
+    <%#= link_to l(:label_preview),
       { :url => { :controller => 'surveys', :action => 'preview', :project_id => @project },
         :method => 'post',
         :remote => true,
@@ -14,4 +14,3 @@
   <% end %>
   <div id="preview" class="wiki"></div>
 <% end %>
-

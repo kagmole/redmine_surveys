@@ -9,7 +9,7 @@ class SurveysController < ApplicationController
   def index
     @surveys = Survey.where(project_id: @project.id).order(:created_at)
   end
-  
+
   def new
     @survey = Survey.new
     @survey.valid_until = Time.now.advance(:days => 30)
@@ -22,12 +22,12 @@ class SurveysController < ApplicationController
     if @survey.save
       add_answers(params[:answers])
       redirect_to :action => 'index', :id => @survey, :anchor => @survey.id
-    end      
+    end
   end
-  
+
   def edit
   end
-  
+
   def update
     if survey_params && @survey.update_attributes(survey_params)
       # update existing questions
@@ -41,19 +41,19 @@ class SurveysController < ApplicationController
       redirect_to :action => 'index', :id => @survey, :anchor => @survey.id
     end
   end
-  
+
   def show
     redirect_to :action => 'index', :project_id => @project.identifier
   end
-  
+
   def results
   end
-  
+
   def download
     require 'csv'
     user_fields = ['login', 'lastname', 'firstname', 'mail']
     # hash of { custom_field_id => name }
-    user_custom_fields = Hash[ User.current.available_custom_fields.collect {|f| [f.id, f.name] } ]      
+    user_custom_fields = Hash[ User.current.available_custom_fields.collect {|f| [f.id, f.name] } ]
     csv_string = CSV.generate(:col_sep => ";", :row_sep => "\r\n") do |csv|
       # add a header line
       header = []
@@ -64,7 +64,7 @@ class SurveysController < ApplicationController
       header += user_fields
       header += user_custom_fields.values
       csv << header
-      
+
       # add rows for each user
       @survey.responders.each do |user|
         row = []
@@ -74,9 +74,9 @@ class SurveysController < ApplicationController
         end
         # add comment
         row << @survey.response_comments.find_by_user_id(user.id).try(:content)
-        
+
         # add user info
-        user_fields.each do |field| 
+        user_fields.each do |field|
           row << user.send(field)
         end
         # add custom fields
@@ -86,12 +86,12 @@ class SurveysController < ApplicationController
         csv << row
       end
     end
-    send_data csv_string, 
+    send_data csv_string,
         :type => "text/csv",
         :filename=> "survey_#{'%02i' % @survey.id}.csv",
         :disposition => 'attachment'
 
-  end 
+  end
 
   def respond
     if @survey.is_valid?
@@ -102,7 +102,7 @@ class SurveysController < ApplicationController
           respond_to_answer(r)
         end
       end
-      if params[:comment] && !params[:comment].empty? 
+      if params[:comment] && !params[:comment].empty?
         @response_comment = ResponseComment.new
         @response_comment.content = params[:comment]
         @response_comment.survey = @survey
@@ -112,7 +112,7 @@ class SurveysController < ApplicationController
     end
     redirect_to :action => 'index', :project_id => @survey.project.identifier, :anchor => @survey.id
   end
-  
+
   def preview
     @survey = Survey.new(survey_params)
     @answers = []
@@ -123,24 +123,24 @@ class SurveysController < ApplicationController
     end
     render :partial => 'preview'
   end
-  
+
   def destroy
     project_id = @survey.project.identifier
     @survey.destroy
     redirect_to :action => 'index', :project_id => project_id
   end
-  
+
   private
-  
+
   def find_survey_and_project
     if (params[:id])
       @survey = Survey.find(params[:id])
     end
-    
-    # @project variable must be set before calling the authorize filter    
-    @project = Project.find(params[:project_id] || @survey.project_id)    
+
+    # @project variable must be set before calling the authorize filter
+    @project = Project.find(params[:project_id] || @survey.project_id)
   end
-  
+
   def respond_to_answer(answer_id)
     if a = @survey.answers.find(answer_id)
       r = Response.new()
@@ -148,7 +148,7 @@ class SurveysController < ApplicationController
       a.responses << r
     end
   end
-  
+
   def add_answers(answers)
     return unless answers.is_a?(Hash) && @survey
     answers.each_value do |a|
@@ -161,5 +161,4 @@ class SurveysController < ApplicationController
   def survey_params
     params.require(:survey).permit(:subject, :allow_edit, :allow_comment, :multiple_choice, :valid_until, :content, :comment_hint)
   end
-
 end

@@ -9,8 +9,8 @@
 <table style="border:0">
 <% @answers.each do |answer| %>
   <tr><td align=left width=20 style="border:0;">
-  <%= @survey.multiple_choice ? 
-    (check_box_tag 'response[]', answer.id, answer.responses.exists?(:user_id => User.current.id)) : 
+  <%= @survey.multiple_choice ?
+    (check_box_tag 'response[]', answer.id, answer.responses.exists?(:user_id => User.current.id)) :
     (radio_button_tag 'response', answer.id, answer.responses.exists?(:user_id => User.current.id)) %>
   </td><td align=lef style="border:0;"t>
   <%= textilizable(answer.content) %>
