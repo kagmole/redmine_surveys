@@ -1,0 +1,24 @@
+# French strings go here for Rails i18n
+fr:
+  label_surveys: 'Sondage'
+  label_survey_new: 'Nouveau sondage'
+  label_surveys_note: 'Assurez-vous de cliquer sur le bouton "Enregistrer" après avoir répondu à chaque question.'
+  label_surveys_allowedit: "Autoriser l'édition"
+  label_surveys_allowcomments: 'Autoriser les commentaires'
+  label_surveys_multiplechoice: 'Choix multiple'
+  label_surveys_validuntil: "Valide jusqu'à"
+  label_surveys_commenthint: "Description pour l'insertion d'un commentaire"
+  label_surveys_answers: 'Réponses'
+  label_surveys_addanswer: 'Ajouter une autre réponse'
+  label_surveys_totalresponses: 'Réponses totales'
+  label_surveys_commentsclick: 'Cliquer pour voir les commentaires'
+  label_surveys_commentsfrom: 'Commentaire de'
+  label_surveys_undone: "Êtes-vous sûr(e) de vouloir supprimer ce sondage ? Il s'agit une action irréversible !"
+  label_surveys_createdby: 'Créé par'
+  label_surveys_iconresults: 'Résultats'
+  label_surveys_icondownload: 'Télécharger'
+  label_surveys_save: 'Enregistrer'
+  label_surveys_saveagain: 'Enregistrer à nouveau'
+  label_surveys_changeanswer: 'Vous pouvez changer votre réponse en appuyant à nouveau sur le bouton.'
+  label_surveys_savechanges: 'Sauvegarder votre réponse en cliquant sur le bouton "Enregistrer"'
+  label_surveys_remove: 'Supprimer'

@@ -13,4 +13,3 @@ RedmineApp::Application.routes.draw do
 	match '/surveys/preview', :to => 'surveys#preview', :via => [:get, :post]  #_preview
 	match '/surveys/destroy', :to => 'surveys#destroy', :via => [:get, :post]  #?
 end
-

@@ -1,9 +1,9 @@
 <script type="text/javascript">
 var answerFieldCount = 1;
 function addAnswerField() {
-    answerFieldCount++;    
+    answerFieldCount++;
     var f = "<div><textarea id=honk style='width:90%' name=answers[" + answerFieldCount + "][content] cols=120 rows=2></textarea>";
-    f = f + "<small><a href=# onClick='var e = jQuery(this); e.up().up().remove(); return false;'>remove</a></small></div>";
+    f = f + "<small><a href=# onClick='$(this).parent().parent().remove(); return false;'><%= l(:label_surveys_remove) %></a></small></div>";
     jQuery('#answers').append(f);
 }
 </script>
@@ -16,8 +16,8 @@ function addAnswerField() {
 <%= f.text_field :subject, :size => 120 %><br />
 
 <label><%= f.check_box :allow_edit %> <%= l(:label_surveys_allowedit) %></label>
-<label><%= f.check_box :allow_comment %> <%= l(:label_surveys_allowcomments) %></label> 
-<label><%= f.check_box :multiple_choice %> <%= l(:label_surveys_multiplechoice) %></label> 
+<label><%= f.check_box :allow_comment %> <%= l(:label_surveys_allowcomments) %></label>
+<label><%= f.check_box :multiple_choice %> <%= l(:label_surveys_multiplechoice) %></label>
 <label><%= f.date_select :valid_until %> <%= l(:label_surveys_validuntil) %></label>
 <br />
 </p>

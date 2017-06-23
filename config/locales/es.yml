@@ -1,4 +1,4 @@
-# English strings go here for Rails i18n
+# Spanish strings go here for Rails i18n
 es:
   label_surveys: 'Encuestas'
   label_survey_new: 'Crear nueva encuesta'
@@ -21,3 +21,4 @@ es:
   label_surveys_saveagain: 'Guardar de nuevo'
   label_surveys_changeanswer: ' Puedes cambiar tu respuesta, pero vuelve a presionar el boton "Guardar".'
   label_surveys_savechanges: ' Por favor presiona el boton "Guardar".'
+  label_surveys_remove: 'Quitar'
